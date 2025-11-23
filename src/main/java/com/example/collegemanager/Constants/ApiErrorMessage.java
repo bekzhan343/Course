@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ApiErrorMessage {
-    ERROR_MESSAGE_BY_ID("NOT FOUND ID -> %s!");
+    ERROR_MESSAGE_BY_ID("COURSE NOT FOUND BY ID -> %s!");
 
     private final String message;
 

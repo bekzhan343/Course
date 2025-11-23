@@ -1,9 +1,9 @@
 package com.example.collegemanager.Controller;
 
-import com.example.collegemanager.Constants.ApiErrorMessage;
-import com.example.collegemanager.Constants.ApiMessage;
-import com.example.collegemanager.Entity.Course;
-import com.example.collegemanager.Repository.CourseRepository;
+import com.example.collegemanager.Service.CourseService;
+import com.example.collegemanager.dto.course.CourseDTO;
+import com.example.collegemanager.response.CourseResponse;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,22 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${end.point.course}")
 public class CourseController {
 
-
-    private final CourseRepository courseRepository;
-
+    private final CourseService courseService;
 
     @GetMapping("${end.point.id}")
-    public ResponseEntity<Course> getCourseByID(@PathVariable Integer id) {
-
-        log.info(ApiMessage.COURSE_INFO_BY_IF.getMessage(id));
-
-
-        return courseRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> {log.info(ApiErrorMessage.ERROR_MESSAGE_BY_ID.getMessage(id));
-                return ResponseEntity.noContent().build();
-
-                });
+    public ResponseEntity<CourseResponse<CourseDTO>> getCourseById(@PathVariable("id") Integer id){
+        CourseResponse<CourseDTO> response = courseService.getCourseByID(id);
+        return ResponseEntity.ok(response);
     }
+
+
 
 }
