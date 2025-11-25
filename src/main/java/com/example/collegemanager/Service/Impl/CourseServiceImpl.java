@@ -31,6 +31,6 @@ public class CourseServiceImpl implements CourseService {
                 .teacher(course.getTeacher())
                 .build();
 
-        return CourseResponse.createdSuccessFully(courseDTO);
+        return CourseResponse.createdSuccessfully(courseDTO);
     }
 }
