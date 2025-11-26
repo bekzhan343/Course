@@ -10,6 +10,7 @@ import com.example.collegemanager.map.CourseMapping;
 import com.example.collegemanager.response.CourseResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +27,18 @@ public class CourseServiceImpl implements CourseService {
                 .orElseThrow(() -> new NotFoundException(ApiErrorMessage.ERROR_MESSAGE_BY_ID.getMessage(id)));
 
         CourseDTO courseDTO = courseMapping.toDTO(course);
+
+        return CourseResponse.createdSuccessfully(courseDTO);
+    }
+
+    @Override
+    public CourseResponse<CourseDTO> createCourse(@NotNull CourseDTO courseDTO) {
+        Course course = new Course();
+        course.setId(courseDTO.getId());
+        course.setName(courseDTO.getName());
+        course.setTeacher(courseDTO.getTeacher());
+
+        courseRepository.save(course);
 
         return CourseResponse.createdSuccessfully(courseDTO);
     }
