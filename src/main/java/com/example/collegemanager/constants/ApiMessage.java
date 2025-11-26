@@ -1,4 +1,4 @@
-package com.example.collegemanager.Constants;
+package com.example.collegemanager.constants;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

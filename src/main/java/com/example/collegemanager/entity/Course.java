@@ -1,4 +1,4 @@
-package com.example.collegemanager.Entity;
+package com.example.collegemanager.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

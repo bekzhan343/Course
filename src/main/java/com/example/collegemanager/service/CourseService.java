@@ -1,4 +1,4 @@
-package com.example.collegemanager.Service;
+package com.example.collegemanager.service;
 
 import com.example.collegemanager.dto.course.CourseDTO;
 import com.example.collegemanager.response.CourseResponse;

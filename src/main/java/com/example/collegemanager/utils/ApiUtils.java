@@ -1,6 +1,6 @@
 package com.example.collegemanager.utils;
 
-import com.example.collegemanager.Constants.ApiConstants;
+import com.example.collegemanager.constants.ApiConstants;
 
 public class ApiUtils {
 

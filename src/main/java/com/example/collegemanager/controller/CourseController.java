@@ -1,7 +1,7 @@
-package com.example.collegemanager.Controller;
+package com.example.collegemanager.controller;
 
-import com.example.collegemanager.Constants.ApiMessage;
-import com.example.collegemanager.Service.CourseService;
+import com.example.collegemanager.constants.ApiMessage;
+import com.example.collegemanager.service.CourseService;
 import com.example.collegemanager.dto.course.CourseDTO;
 import com.example.collegemanager.response.CourseResponse;
 import com.example.collegemanager.utils.ApiUtils;
