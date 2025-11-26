@@ -33,6 +33,8 @@ public class CourseController {
     public ResponseEntity<CourseResponse<CourseDTO>> createCourse(@RequestBody CourseDTO courseDTO){
         CourseResponse<CourseDTO> courseResponse =courseService.createCourse(courseDTO);
 
+        log.trace(ApiMessage.CURRENT_METHOD_NAME.getValue(), ApiUtils.getCurrentMethodName());
+        log.info(ApiMessage.COURSE_INFO_BY_IF.getValue(), courseDTO.getId());
         return ResponseEntity.ok(courseResponse);
     }
 }
