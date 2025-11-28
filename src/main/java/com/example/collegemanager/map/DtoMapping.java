@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class CourseMapping {
+public class DtoMapping {
 
     public CourseDTO toDTO(Course course){
         return CourseDTO.builder()

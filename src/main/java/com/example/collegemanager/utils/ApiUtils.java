@@ -7,8 +7,9 @@ public class ApiUtils {
     public static String getCurrentMethodName(){
         try {
             return Thread.currentThread().getStackTrace()[2].getMethodName();
-        }catch (Exception cause){
+        }catch (Exception e){
             return ApiConstants.UNDEFINED;
         }
     }
+
 }
