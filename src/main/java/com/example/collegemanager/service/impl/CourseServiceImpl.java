@@ -9,7 +9,7 @@ import com.example.collegemanager.service.CourseService;
 import com.example.collegemanager.dto.course.CourseDTO;
 import com.example.collegemanager.exceptions.NotFoundException;
 import com.example.collegemanager.map.DtoMapping;
-import com.example.collegemanager.response.CourseResponse;
+import com.example.collegemanager.response.IamResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -25,26 +25,42 @@ public class CourseServiceImpl implements CourseService {
 
 
     @Override
-    public CourseResponse<CourseDTO> getCourseByID(@NonNull Integer id) {
+    public IamResponse<CourseDTO> getCourseByID(@NonNull Integer id) {
         Course course = courseRepository
                 .findById(id)
-                .orElseThrow(() -> new NotFoundException(ApiErrorMessage.ERROR_MESSAGE_BY_ID.getMessage(id)));
+                .orElseThrow(() -> new NotFoundException(ApiErrorMessage.INFO_NOT_FOUND.getMessage(id)));
 
         CourseDTO courseDTO = dtoMapping.toDTO(course);
 
-        return CourseResponse.createdSuccessfully(courseDTO);
+        return IamResponse.createdSuccessfully(courseDTO);
     }
 
     @Override
-    public CourseResponse<CourseDTO> createCourse(@NotNull CourseDTO courseDTO) {
-        if (courseRepository.existsByName(courseDTO.getName())){
-            throw new  DataExistsException(ApiErrorMessage.DATA_ALREADY_EXISTS_INFO.getMessage(courseDTO.getName()));
+    public IamResponse<CourseDTO> createCourse(@NotNull CourseDTO courseDTO) {
+        if (courseRepository.existsByName(courseDTO.getName())) {
+            throw new DataExistsException(ApiErrorMessage.DATA_ALREADY_EXISTS_INFO.getMessage(courseDTO.getName()));
         }
 
         Course course = entityMapping.toEntity(courseDTO);
 
         courseRepository.save(course);
 
-        return CourseResponse.createdSuccessfully(courseDTO);
+        return IamResponse.createdSuccessfully(courseDTO);
     }
+
+    @Override
+    public IamResponse<CourseDTO> updateCourse(@NotNull Integer id, @NotNull CourseDTO courseDTO) {
+        Course updated = courseRepository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException(ApiErrorMessage.INFO_NOT_FOUND.getMessage(id)));
+
+        updated.setId(id);
+        updated.setName(courseDTO.getName());
+        updated.setTeacher(courseDTO.getTeacher());
+
+        courseRepository.save(updated);
+
+        return IamResponse.createdSuccessfully(courseDTO);
+    }
+
 }

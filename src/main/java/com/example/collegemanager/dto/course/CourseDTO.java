@@ -16,7 +16,6 @@ import java.io.Serializable;
 @Builder
 public class CourseDTO implements Serializable {
 
-    @NotNull(message = "id cannot be empty!")
     private Integer id;
     @NotBlank(message = "name cannot be empty!")
     private String name;
