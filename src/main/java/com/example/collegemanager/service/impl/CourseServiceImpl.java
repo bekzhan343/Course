@@ -27,7 +27,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public IamResponse<CourseDTO> getCourseByID(@NonNull Integer id) {
         Course course = courseRepository
-                .findById(id)
+                .findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new NotFoundException(ApiErrorMessage.INFO_NOT_FOUND.getMessage(id)));
 
         CourseDTO courseDTO = dtoMapping.toDTO(course);
@@ -51,7 +51,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public IamResponse<CourseDTO> updateCourse(@NotNull Integer id, @NotNull CourseDTO courseDTO) {
         Course updated = courseRepository
-                .findById(id)
+                .findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new NotFoundException(ApiErrorMessage.INFO_NOT_FOUND.getMessage(id)));
 
         updated.setId(id);
@@ -61,6 +61,15 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.save(updated);
 
         return IamResponse.createdSuccessfully(courseDTO);
+
     }
 
+    @Override
+    public void softDelete(@NotNull Integer id) {
+        Course course = courseRepository.findByIdAndDeletedFalse(id)
+                .orElseThrow(() -> new NotFoundException(ApiErrorMessage.INFO_NOT_FOUND.getMessage(id)));
+
+        course.setDeleted(true);
+        courseRepository.save(course);
+    }
 }

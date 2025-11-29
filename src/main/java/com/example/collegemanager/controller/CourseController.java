@@ -47,4 +47,13 @@ public class CourseController {
 
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("${end.point.id}")
+    public ResponseEntity<Void> deleteCourse(@PathVariable("id") Integer id){
+        courseService.softDelete(id);
+
+        log.trace(ApiMessage.CURRENT_METHOD_NAME.getValue(), ApiUtils.getCurrentMethodName());
+
+        return ResponseEntity.ok().build();
+    }
 }

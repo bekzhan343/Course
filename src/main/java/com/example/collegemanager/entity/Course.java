@@ -23,4 +23,7 @@ public class Course {
 
     @Column(name = "teacher")
     private String teacher;
+
+    @Column(name = "deleted", nullable = false)
+    private Boolean deleted;
 }

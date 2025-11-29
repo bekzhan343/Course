@@ -11,4 +11,6 @@ public interface CourseService {
     IamResponse<CourseDTO> createCourse(@NotNull CourseDTO courseDTO);
 
     IamResponse<CourseDTO> updateCourse(@NotNull Integer id, @NotNull CourseDTO courseDTO);
+
+    void softDelete(@NotNull Integer id);
 }
